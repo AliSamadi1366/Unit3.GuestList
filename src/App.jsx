@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
-const BASE_URL = "https://fsa-crud-2aa9294fe819.herokuapp.com/api/";
-const COHORT = "/2412-DEMO";
-const RESOURCE = "/guests";
-const API = BASE_URL + COHORT + RESOURCE;
+const BASE_URL = "https://fsa-crud-2aa9294fe819.herokuapp.com/api/COHORT_CODE/";
+const COHORT = "/guests";
+const API = BASE_URL + COHORT;
 
 export default function App() {
   const [guests, setGuests] = useState([
@@ -46,7 +45,7 @@ function GuestList({ guests }) {
       {selectedGuest ? (
         <div>
           <GuestDetail guest={selectedGuest} />
-          <button onClick={() => selectedGuest(null)}>Back</button>
+          <button onClick={() => setSelectedGuest(null)}>Back</button>
         </div>
       ) : (
         <ul className="guests">
@@ -67,20 +66,19 @@ function GuestCard({ guest, onClick }) {
   return (
     <li onClick={onClick} className="guest">
       <h2>{guest.name}</h2>
-      <p>{guest.Email}</p>
+      <p>{guest.email}</p>
       <p>{guest.phone}</p>
     </li>
   );
 }
-function GuestDetail({ guest, setSelectedGuest }) {
+function GuestDetail({ guest }) {
   return (
     <div className="guest-details">
       <h2>{guest.name}</h2>
-      <p>{guest.Email}</p>
+      <p>{guest.email}</p>
       <p>{guest.phone}</p>
       <p>{guest.bio}</p>
       <p>{guest.job}</p>
-      <button onClick={() => setSelectedGuest(null)}>Back</button>
     </div>
   );
 }
