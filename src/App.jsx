@@ -40,32 +40,41 @@ export default function App() {
 }
 
 function GuestList({ guests }) {
+  const [selectedGuest, setSelectedGuest] = useState(null);
   return (
-    <ul className="guests">
-      {guests.map((guest) => (
-        <GuestCard key={guest.id} guest={guest} onClick={() => GuestDetail()} />
-      ))}
-    </ul>
+    <>
+      <ul className="guests">
+        {guests.map((guest) => (
+          <GuestCard
+            key={guest.id}
+            guest={guest}
+            onClick={() => setSelectedGuest(guest)}
+          />
+        ))}
+      </ul>
+      {selectedGuest && <GuestDetail guest={selectedGuest} />}
+    </>
   );
 }
 
-function GuestCard({ guest }) {
+function GuestCard({ guest, onClick }) {
   return (
-    <li className="guest">
+    <li onClick={onClick} className="guest">
       <h2>{guest.name}</h2>
       <p>{guest.Email}</p>
       <p>{guest.phone}</p>
     </li>
   );
 }
-function GuestDetail({ guest }) {
+function GuestDetail({ guest, setSelectedGuest }) {
   return (
-    <div className="guest details">
+    <div className="guest-details">
       <h2>{guest.name}</h2>
       <p>{guest.Email}</p>
       <p>{guest.phone}</p>
       <p>{guest.bio}</p>
       <p>{guest.job}</p>
+      <button onClick={() => setSelectedGuest(null)}>Back</button>
     </div>
   );
 }
