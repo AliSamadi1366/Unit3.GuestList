@@ -1,5 +1,7 @@
 import useQuery from "./useQuery";
 import { useState } from "react";
+import GuestCard from "./GuestCard";
+import GuestDetail from "./GuestDetail";
 export default function App() {
   const { data: guests, loading, error } = useQuery("/guests");
   if (loading) return <p>Loading...</p>;
@@ -32,27 +34,6 @@ function GuestList({ guests }) {
           ))}
         </ul>
       )}
-    </div>
-  );
-}
-
-function GuestCard({ guest, onClick }) {
-  return (
-    <li onClick={onClick} className="guest">
-      <h2>{guest.name}</h2>
-      <p>{guest.email}</p>
-      <p>{guest.phone}</p>
-    </li>
-  );
-}
-function GuestDetail({ guest }) {
-  return (
-    <div className="guest-details">
-      <h2>{guest.name}</h2>
-      <p>{guest.email}</p>
-      <p>{guest.phone}</p>
-      <p>{guest.bio}</p>
-      <p>{guest.job}</p>
     </div>
   );
 }
